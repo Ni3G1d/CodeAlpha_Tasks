@@ -1,0 +1,58 @@
+from scapy.all import sniff
+from scapy.layers.inet import IP, TCP, UDP
+from scapy.layers.dns import DNS, DNSQR
+import socket
+
+def get_service(port):
+    common_ports = {
+        80: "HTTP",
+        443: "HTTPS",
+        53: "DNS",
+        21: "FTP",
+        22: "SSH",
+        25: "SMTP",
+        110: "POP3",
+        143: "IMAP"
+    }
+    return common_ports.get(port, "Unknown")
+
+def packet_callback(packet):
+    if packet.haslayer(IP):
+        ip_layer = packet[IP]
+        
+        src_ip = ip_layer.src
+        dst_ip = ip_layer.dst
+        
+        print("="*70)
+        print(f"Source IP        : {src_ip}")
+        print(f"Destination IP   : {dst_ip}")
+
+        # TCP Handling
+        if packet.haslayer(TCP):
+            tcp_layer = packet[TCP]
+            src_port = tcp_layer.sport
+            dst_port = tcp_layer.dport
+            
+            service = get_service(dst_port)
+            
+            print(f"Protocol         : TCP")
+            print(f"Source Port      : {src_port}")
+            print(f"Destination Port : {dst_port}")
+            print(f"Service          : {service}")
+        
+        # UDP Handling (DNS)
+        elif packet.haslayer(UDP):
+            udp_layer = packet[UDP]
+            print("Protocol         : UDP")
+
+        # DNS Query Capture
+        if packet.haslayer(DNS) and packet.haslayer(DNSQR):
+            dns_query = packet[DNSQR].qname.decode()
+            print(f"DNS Query        : {dns_query}")
+
+        print("="*70)
+
+print("Advanced Network Sniffer Running...")
+print("Press Ctrl+C to stop\n")
+
+sniff(filter="tcp or udp", prn=packet_callback, store=False)
