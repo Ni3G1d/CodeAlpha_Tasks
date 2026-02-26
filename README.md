@@ -6,7 +6,7 @@ The internship focuses on practical cybersecurity concepts including network tra
 
 ---
 
-# 📌 Task 1 – Advanced Network Traffic Analyzer (Mini Wireshark)
+# 📌 Task 1 – Advanced Network Traffic Analyzer
 
 ## 📖 Overview
 
@@ -126,6 +126,24 @@ Manipulation of account recovery settings.
 - Security Awareness Training Development
 - Practical Cybersecurity Problem Solving
 
+
 ---
 
-# 📁 Repository Structure
+# 🚀 Conclusion
+
+These tasks demonstrate practical understanding of:
+
+- Network-level monitoring
+- Real-world phishing attack techniques
+- Human-factor exploitation in cybersecurity
+- Defensive security practices
+- Incident response strategies
+
+Cybersecurity is not only about technical tools but also about awareness, prevention, and secure decision-making.
+
+---
+
+## 👩‍💻 Author
+
+Cyber Security Intern – CodeAlpha Internship Program  
+GitHub: https://github.com/Ni3G1d
